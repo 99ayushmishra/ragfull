@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask Question</title>
+    <style>
+        /* Add some basic styling (optional) */
+        #chat-history, #retrieved-results {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ask a Question</h1>
+    <form action="{{ url_for('handle_question_groq') }}" method="post">
+        <input type="text" name="question" placeholder="Type your question here">
+        <button type="submit">Ask</button>
+    </form>
+
+    <h2>Session ID: {{ session_id }}</h2>
+
+    {% if answer %}
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+
+    <h2>Retrieved Results (Context):</h2>
+    <div id="retrieved-results">
+        {% if retrieved_results %}
+            <p>{{ retrieved_results }}</p>
+        {% else %}
+            <p>No context retrieved.</p>
+        {% endif %}
+    </div>
+
+    <h2>Chat History</h2>
+    <div id="chat-history">
+        {% for entry in chat_history %}
+            <p><strong>You:</strong> {{ entry['question'] }}</p>
+            <p><strong>Bot:</strong> {{ entry['answer'] }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
