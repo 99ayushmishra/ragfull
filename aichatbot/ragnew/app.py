@@ -92,7 +92,7 @@ def handle_question_groq():
     Question: {input}
     """)
 
-    groq_api_key = "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"
+    groq_api_key = "gsk_9c7hcpvMcu0TD9"
     llm = ChatGroq(temperature=0, groq_api_key=groq_api_key, model_name="Llama3-8b-8192")
 
     document_chain = create_stuff_documents_chain(llm, prompt)
